@@ -1,5 +1,6 @@
 #!/bin/bash
 touch /home/ubuntu/.bash_aliases
+mkdir -p /var/www/html/front.mmi.run/
 echo "alias userdatalog='cat /var/log/cloud-init-output.log'" >> /home/ubuntu/.bashrc
 echo "alias p='pm2'" >> /home/ubuntu/.bashrc
 echo "alias ps='pm2 status'" >> /home/ubuntu/.bashrc
@@ -38,8 +39,6 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo gpg --dearmor -o /usr/s
 echo "deb [signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo DEBIAN_FRONTEND=noninteractive apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs yarn
-
-
 sudo DEBIAN_FRONTEND=noninteractive apt-get update && sudo apt-get upgrade -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y git curl wget zip openssh-server
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y awscli
