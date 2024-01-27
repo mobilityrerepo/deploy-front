@@ -34,9 +34,15 @@ fi
 echo '
 alias deploycheck='"'"'pm2 list && command -v nvm && node -v && aws --version && rustc --version && cargo --version && sudo systemctl status ssh && sudo systemctl status nginx && sudo nginx -t && pm2 info front.mmi && ls -l /home/ubuntu/ && ls -l /var/www/ && timedatectl && cat /var/log/cloud-init-output.log'"'"'
 ' >> /home/ubuntu/.bashrc
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y git curl wget zip openssh-server
-sudo apt-get install -y awscli
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo gpg --dearmor -o /usr/share/keyrings/yarn-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo DEBIAN_FRONTEND=noninteractive apt-get update
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs yarn
+
+
+sudo DEBIAN_FRONTEND=noninteractive apt-get update && sudo apt-get upgrade -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y git curl wget zip openssh-server
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y awscli
 wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
 sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
 sudo systemctl enable ssh
@@ -49,7 +55,7 @@ nvm alias default 18.18.2
 npm install -g yarn pm2
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 source $HOME/.cargo/env
-sudo apt-get install -y nginx
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nginx
 sudo systemctl start nginx
 sudo systemctl enable nginx
 
