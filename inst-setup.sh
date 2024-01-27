@@ -16,6 +16,12 @@ echo "alias countFiles='ls -1 | wc -l'" >> /home/ubuntu/.bashrc
 sudo echo "alias available='sudo ls -al --color /etc/nginx/sites-available'" >> /home/ubuntu/.bashrc
 sudo echo "alias ngx='cd /etc/nginx/sites-available/'" >> /home/ubuntu/.bashrc
 sudo echo "alias rbash='source /home/ubuntu/.bashrc'" >> /home/ubuntu/.bashrc
+sudo echo "alias ngxs='sudo systemctl status nginx'" >> /home/ubuntu/.bashrc
+sudo echo "alias ngxstart='sudo systemctl start nginx'" >> /home/ubuntu/.bashrc
+sudo echo "alias ngxreload='sudo systemctl reload nginx'" >> /home/ubuntu/.bashrc
+sudo echo "alias ngxrestart='sudo systemctl restart nginx'" >> /home/ubuntu/.bashrc
+sudo echo "alias nginxreload='sudo /usr/local/nginx/sbin/nginx -s reload'" >> /home/ubuntu/.bashrc
+sudo echo "alias nginxtest='sudo /usr/local/nginx/sbin/nginx -t'" >> /home/ubuntu/.bashrc
 echo '
 fetch_public_ip() {
    curl -s http://icanhazip.com
